@@ -1,0 +1,28 @@
+# Unity build + cache
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild*/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+SysInfo.txt
+
+# IDE/OS clutter
+.vs/
+*.csproj
+*.sln
+*.unityproj
+*.pidb
+*.user
+*.userprefs
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Crash/Profiler
+*.stacktrace
+*.diag
+*.dmp
