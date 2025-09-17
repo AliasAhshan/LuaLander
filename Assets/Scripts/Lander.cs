@@ -1,26 +1,44 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Lander : MonoBehaviour {
 
+
+    public event EventHandler OnUpForce;
+    public event EventHandler OnRightForce;
+    public event EventHandler OnLeftForce;
+    public event EventHandler onBeforeForce;
+
+
     private Rigidbody2D landerRigidbody2D;
+    private float fuelAmount = 10f;
 
     private void Awake() {
         landerRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate() {
+        onBeforeForce?.Invoke(this, EventArgs.Empty);
+
+        if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed) {
+            ConsumeFuel();
+        }
+
         if (Keyboard.current.upArrowKey.isPressed) {
             float force = 700f;
             landerRigidbody2D.AddForce(force * Time.deltaTime * transform.up);
+            OnUpForce?.Invoke(this, EventArgs.Empty);
         }
         if (Keyboard.current.leftArrowKey.isPressed) {
             float turnSpeed = +100f;
             landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+            OnLeftForce?.Invoke(this, EventArgs.Empty);
         }
         if (Keyboard.current.rightArrowKey.isPressed) {
             float turnSpeed = -100f;
             landerRigidbody2D.AddTorque(turnSpeed * Time.deltaTime);
+            OnRightForce?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -58,6 +76,11 @@ public class Lander : MonoBehaviour {
         int score = Mathf.RoundToInt((landingAngleScore + landingSpeedScore) * landingPad.GetScoreMultiplier());
 
         Debug.Log("score: " + score);
+    }
+
+    private void ConsumeFuel() {
+        float fuelConsumptionAmount = 1f;
+        fuelAmount -= fuelConsumptionAmount * Time.deltaTime;
     }
 
     private void Update() {
