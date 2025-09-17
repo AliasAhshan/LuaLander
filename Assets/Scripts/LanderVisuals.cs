@@ -11,7 +11,7 @@ public class LanderVisuals : MonoBehaviour {
         lander.OnUpForce += Lander_OnUpForce;
         lander.OnLeftForce += Lander_OnLeftForce;
         lander.OnRightForce += Lander_OnRightForce;
-        lander.onBeforeForce += Lander_onBeforeForce;
+        lander.OnBeforeForce += Lander_OnBeforeForce;
 
 
         SetEnabledThrusterParticleSystem(leftThrusterParticleSystem, false);
@@ -20,7 +20,7 @@ public class LanderVisuals : MonoBehaviour {
 
     }
 
-    private void Lander_onBeforeForce(object sender, System.EventArgs e) {
+    private void Lander_OnBeforeForce(object sender, System.EventArgs e) {
         SetEnabledThrusterParticleSystem(leftThrusterParticleSystem, false);
         SetEnabledThrusterParticleSystem(middleThrusterParticleSystem, false);
         SetEnabledThrusterParticleSystem(rightThrusterParticleSystem, false);
