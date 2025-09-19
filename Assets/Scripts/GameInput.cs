@@ -29,4 +29,9 @@ public class GameInput : MonoBehaviour {
     public bool IsLeftActionPressed() {
         return inputActions.Player.LanderLeft.IsPressed();
     }
+
+
+    public Vector2 GetMovementInputVector2() {
+        return inputActions.Player.Movement.ReadValue<Vector2>();
+    }
 }
